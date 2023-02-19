@@ -26,7 +26,6 @@ function VerbInformation() {
     <>
       <div id="verb_information">
         <div id="cas_i_tlumaczenie">
-
           {state.isLoading ? <LoadingDotsIcon /> : <p id="czasownik">{state.verb.czasownik}</p>}
           {state.isLoading ? "" : <p id="tlumaczenie">{`(${state.verb.tlumaczenie})`}</p>}
         </div>

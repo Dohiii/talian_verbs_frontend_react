@@ -5,10 +5,10 @@ import { MultiSelect } from "react-multi-select-component";
 
 const options = [
   { label: "IO", value: "IO" },
-  { label: "LUI/LEI", value: "LUI" },
-  { label: "VOI", value: "VOI" },
   { label: "TU", value: "TU" },
+  { label: "LUI/LEI", value: "LUI" },
   { label: "NOI", value: "NOI" },
+  { label: "VOI", value: "VOI" },
   { label: "LORO", value: "LORO" },
 ];
 

@@ -11,8 +11,6 @@ function SpecialButtons(props) {
 
   return (
     <div className="italian-letters">
-
-
       <Tooltip anchorId="à" />
       <button id="à" data-tooltip-content="Skopiuj à" className="btn-italian-letter" onClick={(e) => handleCopyText(e)}>à</button>
       <Tooltip anchorId="è" />
