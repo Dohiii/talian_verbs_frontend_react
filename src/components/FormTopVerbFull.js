@@ -15,6 +15,7 @@ function FormTopVerbFull() {
     "IO": "",
     "TU": "",
     "LUI": "",
+    "LEI": "",
     "NOI": "",
     "VOI": "",
     "LORO": ""
@@ -23,7 +24,7 @@ function FormTopVerbFull() {
   const verbFullCorrect = {
     "IO": state.verb.IO,
     "TU": state.verb.TU,
-    "LUI": state.verb.LUI,
+    "LUI": `${state.verb.LUI}; ${state.verb.LEI}`,
     "NOI": state.verb.NOI,
     "VOI": state.verb.VOI,
     "LORO": state.verb.LORO
@@ -48,8 +49,10 @@ function FormTopVerbFull() {
 
 
   const handleKeyDown = (e, index) => {
-    const correctVerb = processCorrectVerb(verbFullCorrect[e.target.name])
+    let correctVerb = processCorrectVerb(verbFullCorrect[e.target.name])
     const inputElementDOM = document.getElementById(e.target.name);
+
+
     if (e.key === 'Enter') {
       if (correctVerb.includes(verbFull[e.target.name])) {
         inputElementDOM.style.borderColor = state.successColor

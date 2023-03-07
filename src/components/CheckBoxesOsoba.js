@@ -6,7 +6,7 @@ import { MultiSelect } from "react-multi-select-component";
 const options = [
   { label: "IO", value: "IO" },
   { label: "TU", value: "TU" },
-  { label: "LUI/LEI", value: "LUI" },
+  { label: "LUI/LEI", value: ["LUI", "LEI"] },
   { label: "NOI", value: "NOI" },
   { label: "VOI", value: "VOI" },
   { label: "LORO", value: "LORO" },
@@ -19,8 +19,12 @@ function CheckBoxesOsoba() {
 
 
   useEffect(() => {
-    const dataToPass = selected.map(el => el.value)
-    dispatchForm({ type: "change_osoby", payload: dataToPass })
+    const dataToPass = selected.map((el) => {
+      return el.value
+    })
+    console.log(dataToPass.flat())
+
+    dispatchForm({ type: "change_osoby", payload: dataToPass.flat() })
   }, [selected])
 
 
