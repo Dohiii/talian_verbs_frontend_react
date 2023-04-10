@@ -10,6 +10,8 @@ import Navbar from './components/Navbar';
 import FormTopVerbFull from './components/FormTopVerbFull';
 import Footer from './components/Footer';
 import FlashMessages from './components/FlashMessages';
+import verbsData from './assets/db/db';
+import filterVerbsOnLocalDb from './assets/filterVerbsOnLocalDb';
 
 
 
@@ -109,44 +111,91 @@ function App() {
   }
 
 
+  // async function fetchDataToServer() {
+  //   let response
+  //   let retries = 0
+
+  //   while (!response) {
+  //     try {
+  //       const res = await fetch("https://italian-verbs.onrender.com/api/v1/verbs", {
+  //         method: "POST",
+  //         headers: {
+  //           'Accept': 'application/json',
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: JSON.stringify({
+  //           category: stateForm.category,
+  //           zwrotne: stateForm.zwrotne,
+  //           osoba: stateForm.osoba,
+  //           tense: stateForm.tense,
+  //         })
+  //       })
+  //       const result = await res.json()
+
+  //       if (result) {
+  //         response = "OK"
+  //         dispatch({ type: "stop_loading" })
+  //         dispatch({ type: "set_verb_in_state", payload: result.verb })
+
+  //         // console.log(result)
+
+  //       }
+  //       return
+  //     } catch (e) {
+  //       if (retries > 30) {
+  //         throw new Error("Oops something go wrong, try to reload the page please")
+  //       }
+  //       console.log(e)
+  //     }
+  //     retries++;
+  //     console.log(`Request failed, retrying (${retries})...`);
+  //   }
+  // }
+
+
   async function fetchDataToServer() {
-    let response
-    let retries = 0
+    try {
+      let response = undefined;
+      let retries = 0;
 
-    while (!response) {
-      try {
-        const res = await fetch("https://italian-verbs.onrender.com/api/v1/verbs", {
-          method: "POST",
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            category: stateForm.category,
-            zwrotne: stateForm.zwrotne,
-            osoba: stateForm.osoba,
-            tense: stateForm.tense,
-          })
-        })
-        const result = await res.json()
+      while (!response || response === "ERROR") {
+        const localVerb = await filterVerbsOnLocalDb(stateForm.category, stateForm.zwrotne, stateForm.osoba, stateForm.tense);
 
-        if (result) {
-          response = "OK"
-          dispatch({ type: "stop_loading" })
-          dispatch({ type: "set_verb_in_state", payload: result.verb })
-          console.log(result)
+        console.log(localVerb);
+
+        if (localVerb.verb) {
+          dispatch({ type: "set_verb_in_state", payload: localVerb.verb });
+          dispatch({ type: "stop_loading" });
+          response = "OK";
+        } else {
+          console.log("No such verb found");
+          response = "ERROR";
         }
-        return
-      } catch (e) {
+
+        if (response === "ERROR") {
+          throw new Error("No such verb found");
+        }
+
+        retries++;
+
+        console.log(`Request failed, retrying (${retries})...`);
+
         if (retries > 30) {
-          throw new Error("Oops something go wrong, try to reload the page please")
+          throw new Error("Oops something go wrong, try to reload the page please");
         }
-        console.log(e)
+
+        await new Promise(resolve => setTimeout(resolve, 1000)); // wait for 1 second before retrying
       }
-      retries++;
-      console.log(`Request failed, retrying (${retries})...`);
+    } catch (error) {
+      console.log(error.message);
+      dispatch({ type: "stop_loading" });
+      dispatch({ type: "set_error", payload: error.message });
     }
   }
+
+
+
+
 
 
   useEffect(() => {
