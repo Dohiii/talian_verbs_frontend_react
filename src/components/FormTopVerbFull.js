@@ -75,7 +75,7 @@ function FormTopVerbFull() {
   const check_if_all_correct = () => {
     if (verbFull.IO === verbFullCorrect.IO
       && verbFull.TU === verbFullCorrect.TU
-      && verbFullCorrect.LUI.includes(verbFull.LUI)
+      && verbFullCorrect.LUI.includes(verbFull.LUI) || verbFullCorrect.LUI.toString() === verbFull.LUI.toString()
       && verbFull.NOI === verbFullCorrect.NOI
       && verbFull.VOI === verbFullCorrect.VOI
       && verbFull.LORO === verbFullCorrect.LORO

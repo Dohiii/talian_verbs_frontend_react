@@ -24,6 +24,7 @@ const initialFormState = {
 
 const initialState = {
   topFormSelected: true,
+  tlumaczenieSelected: false,
   isLoading: true,
   count: 0,
   fullVerbCount: 0,
@@ -212,10 +213,9 @@ function App() {
 
             <Navbar />
             <FlashMessages messages={state.flashMessages} />
-            <Routes>
-              <Route path="/" element={state.topFormSelected ? <FormTop /> : <FormTopVerbFull />} />
-              <Route path="/przetlumacz" element={<FormTranslateVerb />} />
-            </Routes>
+
+            {state.topFormSelected ? <FormTop /> : <FormTopVerbFull />}
+            {/* {<FormTranslateVerb />} */}
 
             <Footer />
           </ContainerMainSection>

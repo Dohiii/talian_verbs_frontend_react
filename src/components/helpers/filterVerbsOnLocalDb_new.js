@@ -47,7 +47,7 @@ async function filterVerbsOnLocalDb_new(category, zwrotne, osoba, tense) {
 
   //working with osoba
   if (osoba.length === 0) {
-    let osobaVal = "IO"
+    let osobaVal = getRandomElementFromArray(['IO', 'TU', 'LUI', 'NOI', 'VOI', 'LORO'])
     initialState.osoba = osobaVal
   }
   if (osoba.length === 1) {

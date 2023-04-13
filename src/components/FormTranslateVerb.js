@@ -35,26 +35,24 @@ function FormTranslateVerb() {
     setCorrectVerb(lowercaseCorrectVerbTlumaczenie)
   }
 
-  useEffect(() => {
-    fetchNewVerb()
-  }, [])
 
   const handleSubmit = async () => {
     dispatch({ type: "count_add" })
 
+    const verbToGes = await state.verb.tlumaczenie.toLowerCase()
 
-    if (!correctVerb.includes(verbInput)) {
+    const correctVerbTlumaczenieArr = processCorrectVerb(verbToGes)
 
-      console.log(correctVerb)
-      console.log(verbInput)
 
+
+    if (!correctVerbTlumaczenieArr.includes(verbInput)) {
       dispatch({ type: "wrong_attempt" })
       setTimeout(() => {
         dispatch({ type: "back_to_normal_input_color" })
       }, 3000);
     }
 
-    if (correctVerb.includes(verbInput)) {
+    if (correctVerbTlumaczenieArr.includes(verbInput)) {
       dispatch({ type: "count_zero" })
       dispatch({ type: "inny_czasownik" })
       setVerbInput("")
@@ -62,7 +60,7 @@ function FormTranslateVerb() {
       fetchNewVerb()
 
       dispatch({ type: "correct_attempt" })
-      dispatch({ type: "flash_message", payload: `Prawidlowo! - "${correctVerb}"` })
+      dispatch({ type: "flash_message", payload: `Prawidlowo! - "${state.verb.tlumaczenie}"` })
       setTimeout(() => {
         dispatch({ type: "back_to_normal_input_color" })
       }, 3000);
@@ -76,7 +74,7 @@ function FormTranslateVerb() {
   }
 
   const handleInnyCzasownik = () => {
-    fetchNewVerb()
+    dispatch({ type: "inny_czasownik" })
   }
 
   const handleKeyDown = (event) => {
@@ -100,7 +98,7 @@ function FormTranslateVerb() {
 
       <div id="verb_information">
         <div id="cas_i_tlumaczenie">
-          <p id="czasownik">{verbToGes}</p>
+          <p id="czasownik">{state.verb.czasownik}</p>
         </div>
       </div>
       <div>
