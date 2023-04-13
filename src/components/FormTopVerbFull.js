@@ -6,6 +6,7 @@ import MainButtons from './MainButtons'
 import SpecialButtons from './SpecialButtons'
 import processCorrectVerb from './helpers/processCorrectWord'
 import VerbInformation from './VerbInformation'
+import FormBottom from './FormBottom'
 
 function FormTopVerbFull() {
   const { state } = useContext(StateContext)
@@ -24,7 +25,8 @@ function FormTopVerbFull() {
   const verbFullCorrect = {
     "IO": state.verb.IO,
     "TU": state.verb.TU,
-    "LUI": `${state.verb.LUI}; ${state.verb.LEI}`,
+    "LUI": [state.verb.LUI, state.verb.LEI],
+    // "LUI": `${state.verb.LUI}; ${state.verb.LEI}`,
     "NOI": state.verb.NOI,
     "VOI": state.verb.VOI,
     "LORO": state.verb.LORO
@@ -60,6 +62,7 @@ function FormTopVerbFull() {
           inputRefs[index + 1].current.focus(); // Focus the next input
         }
         dispatch({ type: "full_verb_count_add" })
+        check_if_all_correct()
       } else {
         inputElementDOM.style.borderColor = state.errorColor
         setTimeout(() => {
@@ -70,7 +73,13 @@ function FormTopVerbFull() {
   };
 
   const check_if_all_correct = () => {
-    if (JSON.stringify(verbFull) === JSON.stringify(verbFullCorrect)) {
+    if (verbFull.IO === verbFullCorrect.IO
+      && verbFull.TU === verbFullCorrect.TU
+      && verbFullCorrect.LUI.includes(verbFull.LUI)
+      && verbFull.NOI === verbFullCorrect.NOI
+      && verbFull.VOI === verbFullCorrect.VOI
+      && verbFull.LORO === verbFullCorrect.LORO
+    ) {
       inputRefs.forEach(ref => {
         const input = ref.current
         input.value = ""
@@ -84,6 +93,7 @@ function FormTopVerbFull() {
   }
 
   const handleSubmit = () => {
+    check_if_all_correct()
     dispatch({ type: "count_add" })
     inputRefs.forEach(ref => {
       const input = ref.current
@@ -126,7 +136,7 @@ function FormTopVerbFull() {
       <InputOsoby inputRefs={inputRefs} verbInput={verbInput || ""} setVerbInput={setVerbInput} handleInputChange={handleInputChange} handleKeyDown={handleKeyDown} />
       <SpecialButtons />
       <MainButtons handleSubmit={handleSubmit} handleodpowiedz={handleodpowiedz} handleInnyCzasownik={handleInnyCzasownik} />
-
+      <FormBottom />
 
     </>
   )

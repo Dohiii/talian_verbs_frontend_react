@@ -1,4 +1,7 @@
 const processCorrectVerb = (word) => {
+  if (Array.isArray(word)) {
+    return word
+  }
   let correctVerbArr = []
 
   if (word.includes(";") || word.includes(",")) {

@@ -20,7 +20,7 @@ function InputField(props) {
         <div className="input-icons">
           <i className="fa fa-check-circle fa-2xl icon" aria-hidden="true"></i>
           <input type="search" value={props.verbInput}
-            style={{ borderColor: state.inputColor }} onKeyDown={handleKeyDown} onChange={e => props.setVerbInput(e.target.value.toLowerCase())} id="name" placeholder="Wpisz poprawny czasownik" autoComplete="off" />
+            style={{ borderColor: state.inputColor }} onKeyDown={handleKeyDown} onChange={e => props.setVerbInput(e.target.value.toLowerCase())} id="name" placeholder={props.placeholder} autoComplete="off" />
 
         </div>
       </div>

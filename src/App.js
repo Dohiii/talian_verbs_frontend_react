@@ -4,15 +4,15 @@ import StateContext from './StateContex';
 import DispatchContext from './DispatchContext';
 import { useImmerReducer } from 'use-immer';
 import FormTop from './components/FormTop';
-import FormBottom from './components/FormBottom';
 import ContainerMainSection from './components/ContainerMainSection';
 import Navbar from './components/Navbar';
 import FormTopVerbFull from './components/FormTopVerbFull';
 import Footer from './components/Footer';
 import FlashMessages from './components/FlashMessages';
-import verbsData from './assets/db/db';
-import filterVerbsOnLocalDb from './assets/filterVerbsOnLocalDb';
-
+// import filterVerbsOnLocalDb from './components/helpers/filterVerbsOnLocalDb';
+import filterVerbsOnLocalDb_new from './components/helpers/filterVerbsOnLocalDb_new';
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
+import FormTranslateVerb from './components/FormTranslateVerb';
 
 
 const initialFormState = {
@@ -137,7 +137,7 @@ function App() {
   //         dispatch({ type: "stop_loading" })
   //         dispatch({ type: "set_verb_in_state", payload: result.verb })
 
-  //         // console.log(result)
+
 
   //       }
   //       return
@@ -159,16 +159,16 @@ function App() {
       let retries = 0;
 
       while (!response || response === "ERROR") {
-        const localVerb = await filterVerbsOnLocalDb(stateForm.category, stateForm.zwrotne, stateForm.osoba, stateForm.tense);
+        const localVerb = await filterVerbsOnLocalDb_new(stateForm.category, stateForm.zwrotne, stateForm.osoba, stateForm.tense);
 
-        console.log(localVerb);
 
         if (localVerb.verb) {
+          console.log(localVerb.verb)
           dispatch({ type: "set_verb_in_state", payload: localVerb.verb });
           dispatch({ type: "stop_loading" });
           response = "OK";
         } else {
-          console.log("No such verb found");
+
           response = "ERROR";
         }
 
@@ -207,15 +207,21 @@ function App() {
   return (
     <StateContext.Provider value={{ state, stateForm }}>
       <DispatchContext.Provider value={{ dispatch, dispatchForm }}>
-        <ContainerMainSection>
-          <FlashMessages messages={state.flashMessages} />
-          <Navbar />
-          {state.topFormSelected ? <FormTop /> : <FormTopVerbFull />}
-          <FormBottom />
-          <Footer />
-        </ContainerMainSection>
+        <BrowserRouter>
+          <ContainerMainSection>
+
+            <Navbar />
+            <FlashMessages messages={state.flashMessages} />
+            <Routes>
+              <Route path="/" element={state.topFormSelected ? <FormTop /> : <FormTopVerbFull />} />
+              <Route path="/przetlumacz" element={<FormTranslateVerb />} />
+            </Routes>
+
+            <Footer />
+          </ContainerMainSection>
+        </BrowserRouter>
       </DispatchContext.Provider>
-    </StateContext.Provider>
+    </StateContext.Provider >
 
   );
 }

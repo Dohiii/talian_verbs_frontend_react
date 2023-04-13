@@ -6,6 +6,7 @@ import VerbInformation from './VerbInformation'
 import DispatchContext from '../DispatchContext'
 import StateContext from '../StateContex'
 import processCorrectVerb from './helpers/processCorrectWord'
+import FormBottom from './FormBottom'
 
 function FormTop() {
   const { state } = useContext(StateContext)
@@ -60,10 +61,10 @@ function FormTop() {
 
     <>
       <VerbInformation />
-      <InputField handleSubmit={handleSubmit} verbInput={verbInput || ""} setVerbInput={setVerbInput} />
+      <InputField handleSubmit={handleSubmit} verbInput={verbInput || ""} setVerbInput={setVerbInput} placeholder={"Wpisz poprawny czasownik"} />
       <SpecialButtons addMyValueToInput={addMyValueToInput} />
       <MainButtons handleInnyCzasownik={handleInnyCzasownik} handleSubmit={handleSubmit} handleodpowiedz={handleodpowiedz} />
-
+      <FormBottom />
     </>
 
   )
