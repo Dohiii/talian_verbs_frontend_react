@@ -23,7 +23,7 @@ function FormTranslateVerb() {
 
 
   const handleSubmit = async () => {
-    dispatch({ type: "count_add" })
+    // dispatch({ type: "count_add" })
 
     console.log(state.count)
 
@@ -35,6 +35,7 @@ function FormTranslateVerb() {
     console.log(correctVerbTlumaczenieArr)
 
     if (!correctVerbTlumaczenieArr.includes(verbInput.toLocaleLowerCase())) {
+      dispatch({ type: "count_zero" })
       dispatch({ type: "wrong_attempt" })
       setTimeout(() => {
         dispatch({ type: "back_to_normal_input_color" })
@@ -42,8 +43,10 @@ function FormTranslateVerb() {
     }
 
     if (correctVerbTlumaczenieArr.includes(verbInput.toLocaleLowerCase())) {
-      dispatch({ type: "count_zero" })
-      dispatch({ type: "inny_czasownik" })
+      dispatch({ type: "count_add" })
+      // dispatch({ type: "count_zero" })
+      // call new verb without setting count to zero
+      dispatch({ type: "inny_czasownik_dla_tlumaczenia" })
       setVerbInput("")
 
       dispatch({ type: "correct_attempt" })
@@ -55,9 +58,14 @@ function FormTranslateVerb() {
   }
 
   const handleodpowiedz = async () => {
-    // dispatch({ type: "count_zero" })
+    dispatch({ type: "count_minus_one" })
     const correctVerb = state.verb.tlumaczenie
-    setVerbInput(correctVerb)
+
+    const correctVerbArr = processCorrectVerb(correctVerb)
+
+    const res = getRandomElementFromArray(correctVerbArr)
+
+    setVerbInput(res)
 
   }
 
@@ -80,7 +88,7 @@ function FormTranslateVerb() {
         <div id="cas_i_tlumaczenie">
           <p id="czasownik">{state.verb.czasownik}</p>
 
-          {/* <p>Prób: {state.count}</p> */}
+          <p id="wynik">doskonały wynik: {state.count >= 0 ? state.count : 0}</p>
 
         </div>
       </div>
@@ -97,7 +105,7 @@ function FormTranslateVerb() {
         </div>
       </div>
 
-      <MainButtons handleInnyCzasownik={handleInnyCzasownik} handleSubmit={handleSubmit} handleodpowiedz={handleodpowiedz} attempts={3} />
+      <MainButtons handleInnyCzasownik={handleInnyCzasownik} handleSubmit={handleSubmit} handleodpowiedz={handleodpowiedz} attempts={0} />
 
     </>
 

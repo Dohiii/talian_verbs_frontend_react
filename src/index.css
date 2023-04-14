@@ -337,6 +337,10 @@ h3 {
   text-transform: capitalize;
 }
 
+/* #wynik {
+  margin-left: 10rem;
+} */
+
 select {
   -webkit-appearance: none;
   -moz-appearance: none;

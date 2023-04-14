@@ -83,6 +83,9 @@ function App() {
       case "count_zero":
         state.count = 0
         return
+      case "count_minus_one":
+        state.count = -1
+        return
       case "full_verb_count_add":
         state.fullVerbCount++
         return
@@ -91,6 +94,9 @@ function App() {
         return
       case "inny_czasownik":
         state.count = 0
+        state.inny_czasownik_clicked++
+        return
+      case "inny_czasownik_dla_tlumaczenia":
         state.inny_czasownik_clicked++
         return
       case "submit_czasownik_forme":
@@ -207,6 +213,7 @@ function App() {
 
 
   const handleNavToggle = (componentName) => {
+
     setActiveComponent(componentName);
   };
 
