@@ -142,7 +142,7 @@ function FormTopVerbFull() {
       <VerbInformation />
       <InputOsoby inputRefs={inputRefs} verbInput={verbInput || ""} setVerbInput={setVerbInput} handleInputChange={handleInputChange} handleKeyDown={handleKeyDown} />
       <SpecialButtons />
-      <MainButtons handleSubmit={handleSubmit} handleodpowiedz={handleodpowiedz} handleInnyCzasownik={handleInnyCzasownik} />
+      <MainButtons handleSubmit={handleSubmit} handleodpowiedz={handleodpowiedz} handleInnyCzasownik={handleInnyCzasownik} attempts={3} />
       <FormBottom />
 
     </>

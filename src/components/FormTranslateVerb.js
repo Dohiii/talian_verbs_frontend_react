@@ -24,6 +24,9 @@ function FormTranslateVerb() {
 
   const handleSubmit = async () => {
     dispatch({ type: "count_add" })
+
+    console.log(state.count)
+
     const verbToGes = await state.verb.tlumaczenie.toLowerCase()
     const correctVerbTlumaczenieArr = processCorrectVerb(verbToGes)
 
@@ -52,9 +55,8 @@ function FormTranslateVerb() {
   }
 
   const handleodpowiedz = async () => {
-    dispatch({ type: "count_zero" })
+    // dispatch({ type: "count_zero" })
     const correctVerb = state.verb.tlumaczenie
-    console.log(correctVerb)
     setVerbInput(correctVerb)
 
   }
@@ -77,12 +79,15 @@ function FormTranslateVerb() {
       <div id="verb_information">
         <div id="cas_i_tlumaczenie">
           <p id="czasownik">{state.verb.czasownik}</p>
+
+          {/* <p>Prób: {state.count}</p> */}
+
         </div>
       </div>
       <div>
         <label htmlFor="name" id="tense"></label>
         <div id="correctWord">
-          <label htmlFor="name" id="osoba">{state.verb.pluc}</label>
+          {/* <label htmlFor="name" id="osoba">{state.verb.pluc}</label> */}
           <div className="input-icons">
             <i className="fa fa-check-circle fa-2xl icon" aria-hidden="true"></i>
             <input type="search" value={verbInput}
@@ -92,7 +97,7 @@ function FormTranslateVerb() {
         </div>
       </div>
 
-      <MainButtons handleInnyCzasownik={handleInnyCzasownik} handleSubmit={handleSubmit} handleodpowiedz={handleodpowiedz} />
+      <MainButtons handleInnyCzasownik={handleInnyCzasownik} handleSubmit={handleSubmit} handleodpowiedz={handleodpowiedz} attempts={3} />
 
     </>
 

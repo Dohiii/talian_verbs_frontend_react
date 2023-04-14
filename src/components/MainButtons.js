@@ -10,7 +10,7 @@ function MainButtons(props) {
     <div className="buttons-container">
       <input className='main-button' id="submit" type="submit" value="Zatwierdź" onClick={props.handleSubmit} />
       <input className='main-button' type="submit" id="new_verb" value="Inny czasownik" onClick={props.handleInnyCzasownik} />
-      {state.count >= 3 ? <input type="submit" id="pdopowiedż" value="Odpowiedz" onClick={props.handleodpowiedz} /> : ""}
+      {state.count >= props.attempts ? <input type="submit" id="pdopowiedż" value="Odpowiedz" onClick={props.handleodpowiedz} /> : ""}
     </div>
   )
 }
