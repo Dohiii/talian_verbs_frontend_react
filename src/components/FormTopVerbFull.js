@@ -42,7 +42,9 @@ function FormTopVerbFull() {
   ];
 
   const handleInputChange = (e) => {
-    setVerbFull({ ...verbFull, [e.target.name]: e.target.value })
+
+    const inputValue = e.target.value
+    setVerbFull({ ...verbFull, [e.target.name]: inputValue.toLowerCase() })
   }
 
   useEffect(() => {
@@ -62,7 +64,6 @@ function FormTopVerbFull() {
           inputRefs[index + 1].current.focus(); // Focus the next input
         }
         dispatch({ type: "full_verb_count_add" })
-        check_if_all_correct()
       } else {
         inputElementDOM.style.borderColor = state.errorColor
         setTimeout(() => {
@@ -127,6 +128,12 @@ function FormTopVerbFull() {
 
   const handleInnyCzasownik = () => {
     dispatch({ type: "inny_czasownik" })
+    inputRefs.forEach(ref => {
+      const input = ref.current
+      input.value = ""
+      input.style.borderColor = state.originalInputColor
+
+    })
   }
 
 
