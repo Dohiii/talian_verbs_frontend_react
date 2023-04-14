@@ -1,5 +1,5 @@
 import './App.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import StateContext from './StateContex';
 import DispatchContext from './DispatchContext';
 import { useImmerReducer } from 'use-immer';
@@ -9,10 +9,10 @@ import Navbar from './components/Navbar';
 import FormTopVerbFull from './components/FormTopVerbFull';
 import Footer from './components/Footer';
 import FlashMessages from './components/FlashMessages';
-// import filterVerbsOnLocalDb from './components/helpers/filterVerbsOnLocalDb';
 import filterVerbsOnLocalDb_new from './components/helpers/filterVerbsOnLocalDb_new';
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import FormTranslateVerb from './components/FormTranslateVerb';
+
 
 
 const initialFormState = {
@@ -203,7 +203,12 @@ function App() {
     fetchDataToServer()
   }, [stateForm, state.inny_czasownik_clicked])
 
+  const [activeComponent, setActiveComponent] = useState('FormTop');
 
+
+  const handleNavToggle = (componentName) => {
+    setActiveComponent(componentName);
+  };
 
   return (
     <StateContext.Provider value={{ state, stateForm }}>
@@ -211,10 +216,23 @@ function App() {
         <BrowserRouter>
           <ContainerMainSection>
 
-            <Navbar />
+            <>
+              <div className="logo">
+                <img src="/CiSTA Czarny.png" alt="" ></img>
+                <div className="links">
+                  <a className={activeComponent === 'FormTop' ? 'active' : ''} onClick={() => handleNavToggle('FormTop')} >Forma czasownika</a>
+                  <a className={activeComponent === 'FormTopVerbFull' ? 'active' : ''} onClick={() => handleNavToggle('FormTopVerbFull')} >Odmień czasownik</a>
+                  <a className={activeComponent === 'FormTranslateVerb' ? 'active' : ''} onClick={() => handleNavToggle('FormTranslateVerb')} >Przetłumacz czasownik</a>
+                </div>
+              </div>
+            </>
             <FlashMessages messages={state.flashMessages} />
 
-            {state.topFormSelected ? <FormTop /> : <FormTopVerbFull />}
+            {activeComponent === 'FormTop' && <FormTop />}
+            {activeComponent === 'FormTopVerbFull' && <FormTopVerbFull />}
+            {activeComponent === 'FormTranslateVerb' && <FormTranslateVerb />}
+
+            {/* {state.topFormSelected ? <FormTop /> : <FormTopVerbFull />} */}
             {/* {<FormTranslateVerb />} */}
 
             <Footer />

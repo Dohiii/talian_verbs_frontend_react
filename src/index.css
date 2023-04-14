@@ -18,7 +18,11 @@ body {
   background: linear-gradient(to bottom right, #a7e0b0, #a1afff); */
 
   background-color: rgba(189, 189, 189, 1);
-  background-image: linear-gradient(38deg, rgba(189, 189, 189, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  background-image: linear-gradient(
+    38deg,
+    rgba(189, 189, 189, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
 
   color: rgb(58, 55, 55);
   height: 100%;
@@ -118,11 +122,13 @@ p {
   text-decoration: none;
   margin: 0.5rem;
   font-size: large;
-  color: #7d7d7d;
+  color: #959494;
+  cursor: pointer;
 }
 
-a .active {
+a.active {
   color: #000;
+  font-size: larger;
 }
 
 .main-section {
@@ -223,7 +229,8 @@ textarea:focus {
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAJCAYAAAA/33wPAAAAvklEQVQoFY2QMQqEMBBFv7ERa/EMXkGw11K8QbDXzuN4BHv7QO6ifUgj7v4UAdlVM8Uwf+b9YZJISnlqrfEUZVlinucnBGKaJgghbiHOyLyFKIoCbdvecpyReYvo/Ma2bajrGtbaC58kCdZ1RZ7nl/4/4d5EsO/7nzl7IUtodBexMMagaRrs+06JLMvcNWmaOv2W/C/TMAyD58dxROgSmvxFFMdxoOs6lliWBXEcuzokXRbRoJRyvqqqQvye+QDMDz1D6yuj9wAAAABJRU5ErkJggg==) 100% no-repeat;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAJCAYAAAA/33wPAAAAvklEQVQoFY2QMQqEMBBFv7ERa/EMXkGw11K8QbDXzuN4BHv7QO6ifUgj7v4UAdlVM8Uwf+b9YZJISnlqrfEUZVlinucnBGKaJgghbiHOyLyFKIoCbdvecpyReYvo/Ma2bajrGtbaC58kCdZ1RZ7nl/4/4d5EsO/7nzl7IUtodBexMMagaRrs+06JLMvcNWmaOv2W/C/TMAyD58dxROgSmvxFFMdxoOs6lliWBXEcuzokXRbRoJRyvqqqQvye+QDMDz1D6yuj9wAAAABJRU5ErkJggg==)
+    100% no-repeat;
   line-height: 1;
 }
 

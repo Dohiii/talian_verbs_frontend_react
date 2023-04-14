@@ -17,47 +17,31 @@ function FormTranslateVerb() {
   const { state } = useContext(StateContext)
   const { dispatch } = useContext(DispatchContext)
   const [verbInput, setVerbInput] = useState("")
-  const [verbToGes, setVerbToGes] = useState("")
-  const [correctVerb, setCorrectVerb] = useState([])
 
 
   const getRandomElementFromArray = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 
-
-  const fetchNewVerb = async () => {
-    const verb = getRandomElementFromArray(verbsData)
-    const correctVerbTlumaczenie = processCorrectVerb(verb.tlumaczenie)
-
-    const lowercaseCorrectVerbTlumaczenie = correctVerbTlumaczenie.map(verb => verb.toLowerCase());
-
-    setVerbToGes(verb.czasownik)
-    setCorrectVerb(lowercaseCorrectVerbTlumaczenie)
-  }
-
-
   const handleSubmit = async () => {
     dispatch({ type: "count_add" })
-
     const verbToGes = await state.verb.tlumaczenie.toLowerCase()
-
     const correctVerbTlumaczenieArr = processCorrectVerb(verbToGes)
 
 
+    console.log(verbInput)
+    console.log(correctVerbTlumaczenieArr)
 
-    if (!correctVerbTlumaczenieArr.includes(verbInput)) {
+    if (!correctVerbTlumaczenieArr.includes(verbInput.toLocaleLowerCase())) {
       dispatch({ type: "wrong_attempt" })
       setTimeout(() => {
         dispatch({ type: "back_to_normal_input_color" })
       }, 3000);
     }
 
-    if (correctVerbTlumaczenieArr.includes(verbInput)) {
+    if (correctVerbTlumaczenieArr.includes(verbInput.toLocaleLowerCase())) {
       dispatch({ type: "count_zero" })
       dispatch({ type: "inny_czasownik" })
       setVerbInput("")
-
-      fetchNewVerb()
 
       dispatch({ type: "correct_attempt" })
       dispatch({ type: "flash_message", payload: `Prawidlowo! - "${state.verb.tlumaczenie}"` })
@@ -67,10 +51,12 @@ function FormTranslateVerb() {
     }
   }
 
-  const handleodpowiedz = () => {
+  const handleodpowiedz = async () => {
     dispatch({ type: "count_zero" })
-    const correctVer = getRandomElementFromArray(correctVerb)
-    setVerbInput(correctVer)
+    const correctVerb = state.verb.tlumaczenie
+    console.log(correctVerb)
+    setVerbInput(correctVerb)
+
   }
 
   const handleInnyCzasownik = () => {
@@ -88,14 +74,6 @@ function FormTranslateVerb() {
   return (
 
     <>
-      {/* <div id="verb_information">
-        <div id="cas_i_tlumaczenie">
-          {state.isLoading ? <LoadingDotsIcon /> : <p id="czasownik">{verb}</p>}
-          {state.isLoading ? "" : <p id="tlumaczenie">{`(${state.verb.tlumaczenie})`}</p>}
-        </div>
-        <p id="tense">{state.verb.tense}</p>
-      </div> */}
-
       <div id="verb_information">
         <div id="cas_i_tlumaczenie">
           <p id="czasownik">{state.verb.czasownik}</p>
@@ -114,8 +92,6 @@ function FormTranslateVerb() {
         </div>
       </div>
 
-
-      {/* <InputField handleSubmit={handleSubmit} verbInput={verbInput || ""} setVerbInput={setVerbInput} placeholder={"Wpisz tłumaczenie"} /> */}
       <MainButtons handleInnyCzasownik={handleInnyCzasownik} handleSubmit={handleSubmit} handleodpowiedz={handleodpowiedz} />
 
     </>
