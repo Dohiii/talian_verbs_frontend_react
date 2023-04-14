@@ -261,7 +261,7 @@ html {
 /* Button */
 
 .buttons-container {
-  margin-left: 5rem;
+  margin-left: auto;
 }
 
 [type="submit"] {
@@ -498,6 +498,15 @@ footer > div > p {
     padding: 0.5rem;
     border-radius: 15px;
   }
+
+  a {
+    font-size: x-small;
+  }
+
+  .logo img {
+    max-width: 60px;
+    margin-right: 20px;
+  }
 }
 
 @media (min-width: 600px) {
@@ -505,7 +514,7 @@ footer > div > p {
   .main-section {
     background-color: #fff;
     padding-top: 2rem;
-    width: 500px;
+    width: 490px;
     padding-bottom: 2rem;
     padding-left: 3rem;
     padding-right: 1rem;

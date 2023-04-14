@@ -84,28 +84,31 @@ function FormTranslateVerb() {
   return (
 
     <>
-      <div id="verb_information">
-        <div id="cas_i_tlumaczenie">
-          <p id="czasownik">{state.verb.czasownik}</p>
+      <div className='center'>
 
-          <p id="wynik">doskonały wynik: {state.count >= 0 ? state.count : 0}</p>
+        <div id="verb_information">
+          <div id="cas_i_tlumaczenie">
+            <p id="czasownik">{state.verb.czasownik}</p>
 
-        </div>
-      </div>
-      <div>
-        <label htmlFor="name" id="tense"></label>
-        <div id="correctWord">
-          {/* <label htmlFor="name" id="osoba">{state.verb.pluc}</label> */}
-          <div className="input-icons">
-            <i className="fa fa-check-circle fa-2xl icon" aria-hidden="true"></i>
-            <input type="search" value={verbInput}
-              style={{ borderColor: state.inputColor }} onKeyDown={handleKeyDown} onChange={e => setVerbInput(e.target.value.toLowerCase())} id="name" placeholder={"Wpisz tłumaczenie"} autoComplete="off" />
+            <p id="wynik">doskonały wynik: {state.count >= 0 ? state.count : 0}</p>
 
           </div>
         </div>
-      </div>
+        <div>
+          <label htmlFor="name" id="tense"></label>
+          <div id="correctWord">
+            {/* <label htmlFor="name" id="osoba">{state.verb.pluc}</label> */}
+            <div className="input-icons">
+              <i className="fa fa-check-circle fa-2xl icon" aria-hidden="true"></i>
+              <input type="search" value={verbInput}
+                style={{ borderColor: state.inputColor }} onKeyDown={handleKeyDown} onChange={e => setVerbInput(e.target.value.toLowerCase())} id="name" placeholder={"Wpisz tłumaczenie"} autoComplete="off" />
 
-      <MainButtons handleInnyCzasownik={handleInnyCzasownik} handleSubmit={handleSubmit} handleodpowiedz={handleodpowiedz} attempts={0} />
+            </div>
+          </div>
+        </div>
+        <MainButtons className="margin-1" handleInnyCzasownik={handleInnyCzasownik} handleSubmit={handleSubmit} handleodpowiedz={handleodpowiedz} attempts={0} />
+
+      </div>
 
     </>
 

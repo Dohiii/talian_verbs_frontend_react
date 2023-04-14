@@ -227,9 +227,9 @@ function App() {
               <div className="logo">
                 <img src="/CiSTA Czarny.png" alt="" ></img>
                 <div className="links">
-                  <a href='./index.html' className={activeComponent === 'FormTop' ? 'active' : ''} onClick={() => handleNavToggle('FormTop')} >Forma czasownika</a>
-                  <a href='./full.html' className={activeComponent === 'FormTopVerbFull' ? 'active' : ''} onClick={() => handleNavToggle('FormTopVerbFull')} >Odmień czasownik</a>
-                  <a href='./tlumaczenie.html' className={activeComponent === 'FormTranslateVerb' ? 'active' : ''} onClick={() => handleNavToggle('FormTranslateVerb')} >Przetłumacz czasownik</a>
+                  <a className={activeComponent === 'FormTop' ? 'active' : ''} onClick={() => handleNavToggle('FormTop')} >Forma czasownika</a>
+                  <a className={activeComponent === 'FormTopVerbFull' ? 'active' : ''} onClick={() => handleNavToggle('FormTopVerbFull')} >Odmień czasownik</a>
+                  <a className={activeComponent === 'FormTranslateVerb' ? 'active' : ''} onClick={() => handleNavToggle('FormTranslateVerb')} >Przetłumacz czasownik</a>
                 </div>
               </div>
             </>
