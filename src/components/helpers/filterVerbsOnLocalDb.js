@@ -1,4 +1,4 @@
-import verbsData from "../../assets/db/db";
+import verbsData from "./db/db";
 
 
 const getRandomElementFromArray = (arr) => arr[Math.floor(Math.random() * arr.length)];

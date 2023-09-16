@@ -144,7 +144,6 @@ function FormTopVerbFull() {
       <SpecialButtons />
       <MainButtons handleSubmit={handleSubmit} handleodpowiedz={handleodpowiedz} handleInnyCzasownik={handleInnyCzasownik} attempts={3} />
       <FormBottom />
-
     </>
   )
 }

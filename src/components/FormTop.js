@@ -63,7 +63,7 @@ function FormTop() {
       <VerbInformation />
       <InputField handleSubmit={handleSubmit} verbInput={verbInput || ""} setVerbInput={setVerbInput} placeholder={"Wpisz poprawny czasownik"} />
       <SpecialButtons addMyValueToInput={addMyValueToInput} />
-      <MainButtons className="buttons-container" handleInnyCzasownik={handleInnyCzasownik} handleSubmit={handleSubmit} handleodpowiedz={handleodpowiedz} attempts={3} />
+      <MainButtons handleInnyCzasownik={handleInnyCzasownik} handleSubmit={handleSubmit} handleodpowiedz={handleodpowiedz} attempts={3} />
       <FormBottom />
     </>
 

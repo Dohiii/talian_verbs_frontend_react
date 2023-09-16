@@ -27,7 +27,7 @@ function FormTranslateVerb() {
 
     console.log(state.count)
 
-    const verbToGes = await state.verb.tlumaczenie.toLowerCase()
+    const verbToGes = await state.verb.czasownik.toLowerCase()
     const correctVerbTlumaczenieArr = processCorrectVerb(verbToGes)
 
 
@@ -50,7 +50,7 @@ function FormTranslateVerb() {
       setVerbInput("")
 
       dispatch({ type: "correct_attempt" })
-      dispatch({ type: "flash_message", payload: `Prawidlowo! - "${state.verb.tlumaczenie}"` })
+      dispatch({ type: "flash_message", payload: `Prawidlowo! - "${state.verb.czasownik}"` })
       setTimeout(() => {
         dispatch({ type: "back_to_normal_input_color" })
       }, 3000);
@@ -59,7 +59,7 @@ function FormTranslateVerb() {
 
   const handleodpowiedz = async () => {
     dispatch({ type: "count_minus_one" })
-    const correctVerb = state.verb.tlumaczenie
+    const correctVerb = state.verb.czasownik
 
     const correctVerbArr = processCorrectVerb(correctVerb)
 
@@ -88,7 +88,7 @@ function FormTranslateVerb() {
 
         <div id="verb_information">
           <div id="cas_i_tlumaczenie">
-            <p id="czasownik">{state.verb.czasownik}</p>
+            <p id="czasownik">{state.verb.tlumaczenie}</p>
 
             <p id="wynik">doskonały wynik: {state.count >= 0 ? state.count : 0}</p>
 
